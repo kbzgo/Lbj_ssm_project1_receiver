@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/js/vue.js"></script>
+    <script src="lib/js/axios.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+
+</head>
+<body>
+    <div id="user" >
+        <p>输入要查询的用户ID：<input v-model="inputid" ></p>
+        <p>用户编号：{{ uid }}</p>
+        <p>用户名：{{ uname }}</p>
+        <p>密码：{{ pwd }}</p>
+        <el-button @click="getSinglefun">获取信息</el-button>
+    </div>
+    <div id="adduser">
+        <p>添加用户：</p>
+        <p>用户名：<input v-model="addname"></p>
+        <p>密码：<input v-model="addpassword"></p>
+        <input type="button" @click="addUserfun" value="添加" class="btn btn-default" />
+    </div>
+    <br/>
+
+    <div id="getall">
+        <p>按编号查询：</p>
+        <p><input v-model="min" maxlength="2">到<input v-model="max" maxlength="2">
+            <input type="button" @click="getByNumber" value="按编号查询" class="btn btn-default"/>
+        </p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>用户编号</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(user,index,key) in users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.password}}</td>
+                    <td><button @click="updatethis(user.id,user.password)" class="btn btn-default">修改</button>
+                    <button @click="deletethis(user.id)" class="btn btn-default">删除</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="button" id="delbt" @click="getAllfun" value="查询全部" class="btn btn-default"/>
+        <p></p><p></p>
+        <!-- 弹出菜单，默认隐藏(visible = false) -->
+        <el-dialog :visible.sync="visible" title="Hello world">
+            <p>修改编号：<input v-model="updateid" disabled></p>
+            <p>修改密码：<input v-model="updatepassword"></p>
+            <input type="button" @click="updatenow" value="修改" class="btn btn-default"/>
+        </el-dialog>
+    </div>
+</body>
+<script>
+</script>
+<script src="lib/js/myjs.js"></script>
+</html>
